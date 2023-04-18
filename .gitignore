@@ -6,3 +6,4 @@ build/
 web/.env
 web/.env.development
 !web/.env.development.example
+playwright-report/
