@@ -1,12 +1,14 @@
 # Tadpole
 
-Preparatory sketch app for [nuvolaris](https://www.nuvolaris.io/) admin panel. Testing/exploring base functionalities of the combination of sveltekit and nuvolaris. many hints and classes found in [microbots](https://github.com/nuvolaris/microbots)
+Preparatory sketch app for [nuvolaris](https://www.nuvolaris.io/) admin panel. Testing/exploring base functionalities of the combination of sveltekit and nuvolaris. Many hints and classes found in [microbots](https://github.com/nuvolaris/microbots)
 
 The project has been scaffolded with [`create-svelte`](https://github.com/sveltejs/kit/tree/master/packages/create-svelte).
 
 ## Overview
 
-This scratch app, found in `/web` is configured to be styled with tailwind. Demo actions/packages are found in `/packages`
+This scratch app, found in `/web` is configured to be styled with tailwind. 
+
+Demo actions/packages are found in `/packages`
 
 
 ### auth bypass
@@ -51,11 +53,18 @@ npm run dev -- --open
 
 ## Installed dependencies
 
+The following dep have been installed: 
+
 [@codemirror/lang-javascript](https://github.com/codemirror/lang-javascript)
 
 [@codemirror/lang-python](https://github.com/codemirror/lang-python)
 
 [svelte-codemirror-editor](https://github.com/touchifyapp/svelte-codemirror-editor)
+
+
+## Setup .env and .env.development files
+copy and rename env.example and env.development.example into 
+.env and .env.development, edit them accordingly. Default OW_API_HOST is http://localhost:3233 , OW_API_KEY is found in ./nuvolaris/config.yaml -namespaces -> nuvolaris.
 
 ## Testing
 
