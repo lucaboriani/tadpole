@@ -1,0 +1,8 @@
+node_modules/
+build/
+.svelte-kit/
+.env
+.env.development
+web/.env
+web/.env.development
+!web/.env.development.example

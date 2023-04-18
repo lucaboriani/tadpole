@@ -1,0 +1,111 @@
+<script>
+	import { onMount } from 'svelte';
+	import Header from '$lib/Header.svelte';
+	import { code } from '$lib/packages/actions/editorStore';
+	import { packages as store } from '$lib/packages/store';
+	import PackageItem from '$lib/packages/PackageItem.svelte';
+	import ActionEditor from '$lib/packages/actions/ActionEditor.svelte';
+	import { variables } from '$lib/envVariables';
+	/** @type {import('./$types').PageData} */
+	export let data;
+
+	const { packages } = data;
+
+	/**
+	 * @type {{name: string; namespace: string; exec: { code: string; }; }}
+	 */
+	let action;
+
+	onMount(() => {
+		// @ts-ignore
+		store.set(packages);
+	});
+
+	/**
+	 * @param {CustomEvent<any>} event
+	 */
+	async function handleActionSelected(event) {
+		try {
+			const { detail } = event;
+			action = await getActionCode(detail);
+			code.set(action.exec.code);
+		} catch (error) {
+			console.log('something went wrong');
+			
+		}
+	}
+	/**
+	 * @param {string} name
+	 * @param {string} namespace
+	 */
+	function getActionPath(name, namespace) {
+		let options = {
+			apihost: variables.apiHost,
+			api_key: window.localStorage.getItem('auth')
+		};
+		let path = options.apihost + '/api/v1/namespaces/_/actions/';
+		if (namespace === 'nuvolaris') {
+			path += name;
+		} else {
+			path += namespace.replace('nuvolaris/', '') + '/' + name;
+		}
+
+		return path;
+	}
+
+	/**
+	 * @param {{ name: string; namespace: string; }} detail
+	 */
+	async function getActionCode({ name, namespace }) {
+		/**
+		 * @type {{ apihost: string; api_key: string | null; }}
+		 */
+
+		if (window.localStorage.getItem('auth')) {
+			let path = getActionPath(name, namespace);
+			path + '?code=true';
+			try {
+				const response = await fetch(path, {
+                    method:'GET',
+					headers: {
+						Authorization: localStorage.getItem('auth') || 'no auth'
+					}
+				});
+				if (response.ok) {
+					const action = await response.json();
+					return action;
+				}
+			} catch (error) {
+				console.log('azz');
+				// @ts-ignore
+				throw new Error(error.message);
+			}
+		} else {
+			alert(`auth key not setted in localstorage!!! Please note that authentication flow hasn't been implemented and the application expects to find a valid item named auth in window.localStorage  with the form "Basic atob(AUTH_VALUES) -> AUTH_VALUES are taken from ./nuvolaris/config.yaml (namespaces -> nuvolaris)."`
+			);
+			return;
+		}
+	}
+</script>
+
+<svelte:head>
+	<title>Actions</title>
+</svelte:head>
+<div class="flex flex-col min-h-screen pl-4 grow">
+	<Header />
+	<h1 class="text-3xl font-bold mt-16">Client loaded packages w/actions</h1>
+	<main class="w-full flex grow">
+		<section class="bg-blue-100 rounded-xl p-8 my-4 min-w-[240px]">
+			{#each [...$store] as [pkg, actions]}
+				<PackageItem
+					packageName={pkg}
+					{actions}
+					on:action-selected={(e) => handleActionSelected(e)}
+				/>
+			{/each}
+		</section>
+		{#if action}
+			<ActionEditor {action} />
+		{/if}
+	</main>
+</div>
