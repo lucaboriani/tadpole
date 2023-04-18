@@ -63,7 +63,7 @@ The following dep have been installed:
 
 
 ## Setup .env and .env.development files
-copy and rename env.example and env.development.example into 
+copy and rename `web/env.example` and `web/env.development.example` into 
 .env and .env.development, edit them accordingly. Default OW_API_HOST is http://localhost:3233 , OW_API_KEY is found in ./nuvolaris/config.yaml -namespaces -> nuvolaris.
 
 ## Testing
