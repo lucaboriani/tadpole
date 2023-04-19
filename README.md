@@ -57,6 +57,8 @@ npm run dev -- --open
 
 The following dep have been installed: 
 
+[buffer](https://www.npmjs.com/package/buffer)
+
 [@codemirror/lang-javascript](https://github.com/codemirror/lang-javascript)
 
 [@codemirror/lang-python](https://github.com/codemirror/lang-python)
