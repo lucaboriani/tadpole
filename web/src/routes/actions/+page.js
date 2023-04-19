@@ -1,12 +1,12 @@
 // @ts-nocheck
 import { OpenWhisk } from '$lib/OpenWhisk';
-const options = {
-	apihost: 'http://localhost:3233',
-	api_key:
-		'11c0ccb0-ba75-433f-844a-eb0d7575ce94:CzZl9E0Zj6NLnXkImiQYeW3oBiQpJUWTJrkcxZetmaqUJSOtTBAmp96bYF0HyOgb'
-};
+import { variables } from '$lib/envVariables';
 
-const ow = new OpenWhisk(options.apihost, options.api_key, 'nuvolaris');
+const ow = new OpenWhisk(
+	variables.apiHost, 
+	variables.apiKey,
+	'nuvolaris'
+)
 
 // @ts-ignore
 /** @type {import('./$types').PageLoad} */

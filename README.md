@@ -10,15 +10,17 @@ This scratch app, found in `/web` is configured to be styled with tailwind.
 
 Demo actions/packages are found in `/packages`
 
+project requires node 16 + 
+
 
 ### auth bypass
 
-Please note that authentication flow hasn't been implemented and the application expects to find a valid item named `auth` in `window.localStorage` with the form
+Please note that authentication flow hasn't been implemented
 
-```js
-`Basic ${atob(AUTH_VALUES)}`
-```
-where AUTH_VALUES are taken from ./nuvolaris/config.yaml (namespaces -> nuvolaris). 
+Setup .env  files
+
+copy and rename `web/env.example`into 
+.env , edit it accordingly. Default OW_API_HOST is http://localhost:3233 , OW_API_KEY is found in ./nuvolaris/config.yaml -namespaces -> nuvolaris.
 
 
 ### Views
@@ -62,9 +64,7 @@ The following dep have been installed:
 [svelte-codemirror-editor](https://github.com/touchifyapp/svelte-codemirror-editor)
 
 
-## Setup .env and .env.development files
-copy and rename `web/env.example` and `web/env.development.example` into 
-.env and .env.development, edit them accordingly. Default OW_API_HOST is http://localhost:3233 , OW_API_KEY is found in ./nuvolaris/config.yaml -namespaces -> nuvolaris.
+
 
 ## Testing
 

@@ -3,6 +3,7 @@
 	import Header from '$lib/Header.svelte';
 	import { code } from '$lib/packages/actions/editorStore';
 	import { packages as store } from '$lib/packages/store';
+	import { authToken } from '$lib/auth/authStore';
 	import PackageItem from '$lib/packages/PackageItem.svelte';
 	import ActionEditor from '$lib/packages/actions/ActionEditor.svelte';
 	import { variables } from '$lib/envVariables';
@@ -41,7 +42,7 @@
 	function getActionPath(name, namespace) {
 		let options = {
 			apihost: variables.apiHost,
-			api_key: window.localStorage.getItem('auth')
+			api_key: variables.apiKey
 		};
 		let path = options.apihost + '/api/v1/namespaces/_/actions/';
 		if (namespace === 'nuvolaris') {
@@ -61,14 +62,14 @@
 		 * @type {{ apihost: string; api_key: string | null; }}
 		 */
 
-		if (window.localStorage.getItem('auth')) {
+		if ($authToken) {
 			let path = getActionPath(name, namespace);
-			path + '?code=true';
+			path += '?code=true';
 			try {
 				const response = await fetch(path, {
                     method:'GET',
 					headers: {
-						Authorization: localStorage.getItem('auth') || 'no auth'
+						Authorization: $authToken
 					}
 				});
 				if (response.ok) {
@@ -81,7 +82,7 @@
 				throw new Error(error.message);
 			}
 		} else {
-			alert(`auth key not setted in localstorage!!! Please note that authentication flow hasn't been implemented and the application expects to find a valid item named auth in window.localStorage  with the form "Basic atob(AUTH_VALUES) -> AUTH_VALUES are taken from ./nuvolaris/config.yaml (namespaces -> nuvolaris)."`
+			alert(`auth key not setted !!! Please note that authentication flow hasn't been implemented, edit your evn files! `
 			);
 			return;
 		}
