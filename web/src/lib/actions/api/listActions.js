@@ -1,18 +1,15 @@
 import { variables } from '$lib/envVariables';
 import { Buffer } from 'buffer';
-import {getActionPath } from './getActionPath'
-/**
- * @param {{ name: string; namespace: string; }} detail
- */
-export async function getActionCode({ name, namespace }) {
+
+
+export async function listActions() {
     /**
      * @type {string}
      */
     const auth = `Basic ${Buffer.alloc(101,variables.apiKey).toString('base64')}`
     
      if (auth) {
-        let path = getActionPath(name, namespace);
-        path += '?code=true';
+        let path = variables.apiHost + '/api/v1/namespaces/_/actions';
         try {
             const response = await fetch(path, {
                 method:'GET',
@@ -21,11 +18,10 @@ export async function getActionCode({ name, namespace }) {
                 }
             });
             if (response.ok) {
-                const action = await response.json();
-                return action;
+                const actions = await response.json();
+                return actions;
             }
         } catch (error) {
-            console.log('azz');
             // @ts-ignore
             throw new Error(error.message);
         }
