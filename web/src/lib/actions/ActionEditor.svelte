@@ -2,23 +2,22 @@
 	import { onMount } from 'svelte';
 	import CodeMirror from 'svelte-codemirror-editor';
 	import { javascript } from '@codemirror/lang-javascript';
-	//import { python } from "@codemirror/lang-python";
-	import { code } from './editorStore';
+	import { python } from "@codemirror/lang-python";
+	import { code, lang } from './editorStore';
 	/**
-	 * @type {{name:string,namespace:string, exec: { code: string; }; }}
+	 * @type {{name:string,namespace:string, exec: { code: string; kind:string }; }}
 	 */
 	export let action;
 
-	/* let languages = {
-		js: "javascript",
-		go: "go",
-		py: "python",
-  	}; */
+	
 
 	$: actionName = action.name;
 	$: namespace = action.namespace;
-
-	onMount(() => code.set(action.exec.code));
+	$: actionLanguage = action.exec.kind.startsWith('nodejs') ? javascript : python
+	onMount(() => {
+		code.set(action.exec.code)
+		lang.set(action.exec.kind)
+	});
 	/**
 	 * @param {any} event
 	 */
@@ -39,19 +38,30 @@
 	<div class="flex justify-between align-center">
 		<div>
 			<b class="block text-sm">{namespace}</b>
-			<h1 class="text-2xl font-bold mb-2">{actionName}</h1>
+			<h1 class="text-2xl font-bold">{actionName}</h1>
+			<span class="block mb-2 text-sm">{$lang}</span>
 		</div>
 		{#if $code !== action.exec.code}
 			<div class="flex">
-				<button on:click={resetCode} class="rounded-xl px-8 mr-2 bg-blue-800 text-slate-200"> RESET </button>
-				<button on:click={updateAction} class="rounded-xl px-8 bg-blue-800 text-slate-200"> UPDATE </button>
+				<button 
+					on:click={resetCode} 
+					class="rounded-xl px-8 mr-2 bg-blue-800 text-slate-200"
+				> 
+					RESET 
+				</button>
+				<button 
+					on:click={updateAction} 
+					class="rounded-xl px-8 bg-blue-800 text-slate-200"
+				> 
+					UPDATE 
+				</button>
 			</div>
 		{/if}
 	</div>
 
 	<CodeMirror
 		value={$code ? $code : action.exec.code}
-		lang={javascript()}
+		lang={actionLanguage()}
 		on:change={handleCodeChange}
 	/>
 </div>

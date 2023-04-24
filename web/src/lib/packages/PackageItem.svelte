@@ -1,8 +1,7 @@
 <script>
 	// @ts-nocheck
-	import { createEventDispatcher } from 'svelte';
-
-	const dispatch = createEventDispatcher();
+	import ActionListItem from '$lib/actions/ActionListItem.svelte';
+	
 	/**
 	 * @type {String}
 	 */
@@ -12,18 +11,25 @@
 	 */
 	export let actions;
 
-	function actionSelected(action) {
-		dispatch('action-selected', action);
-	}
+	let expand = false
+	
 </script>
 
 <div>
-	<h3 class="text-xl font-bold">{packageName === 'nuvolaris' ? 'default' : packageName.replace('nuvolaris', '') }</h3>
-	{#each actions as action}
-		<button 
-			class="block" 
-			on:click={() => actionSelected(action)}>
-				{action.name}
-			</button>
-	{/each}
+	<button class="flex items-center justify-between w-full" on:click={()=>expand = !expand} >
+		<h3 class="text-xl font-bold">
+			{packageName === 'nuvolaris' ? 'default' : packageName.replace('nuvolaris', '') }
+		</h3>
+		<div
+			class={`text-gray-300 font-bold ${expand ? '-rotate-90' : 'rotate-90'}`}
+		> 
+			> 
+		</div>
+	</button>
+	{#if expand}
+		{#each actions as action}
+			<ActionListItem action={action} on:action-selected/>
+		{/each}
+	{/if}
+	
 </div>
