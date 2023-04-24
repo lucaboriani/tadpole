@@ -3,22 +3,23 @@
 	import CodeMirror from 'svelte-codemirror-editor';
 	import { javascript } from '@codemirror/lang-javascript';
 	//import { python } from "@codemirror/lang-python";
-	import { code } from './editorStore';
+	import { code, lang } from './editorStore';
 	/**
-	 * @type {{name:string,namespace:string, exec: { code: string; }; }}
+	 * @type {{name:string,namespace:string, exec: { code: string; kind:string }; }}
 	 */
 	export let action;
 
-	/* let languages = {
-		js: "javascript",
-		go: "go",
-		py: "python",
-  	}; */
+	/* const languages = {
+		'nodejs:14': javascript
+	} */
 
 	$: actionName = action.name;
 	$: namespace = action.namespace;
-
-	onMount(() => code.set(action.exec.code));
+	
+	onMount(() => {
+		code.set(action.exec.code)
+		lang.set(action.exec.kind)
+	});
 	/**
 	 * @param {any} event
 	 */
@@ -39,7 +40,8 @@
 	<div class="flex justify-between align-center">
 		<div>
 			<b class="block text-sm">{namespace}</b>
-			<h1 class="text-2xl font-bold mb-2">{actionName}</h1>
+			<h1 class="text-2xl font-bold">{actionName}</h1>
+			<span class="block mb-2 text-sm">{$lang}</span>
 		</div>
 		{#if $code !== action.exec.code}
 			<div class="flex">
