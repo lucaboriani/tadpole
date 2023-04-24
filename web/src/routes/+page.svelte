@@ -12,7 +12,7 @@
 	const { packages } = data;
 
 	/**
-	 * @type {{name: string; namespace: string; exec: { code: string; }; }}
+	 * @type {{name: string; namespace: string; exec: { code: string; kind:string }; }}
 	 */
 	let action;
 
@@ -55,7 +55,7 @@
 			{/each}
 		</section>
 		{#if action}
-			<ActionEditor {action} />
+			<ActionEditor action={action} />
 		{/if}
 	</main>
 </div>

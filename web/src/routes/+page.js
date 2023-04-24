@@ -16,7 +16,7 @@ export async function load() {
 			}
 		});
 
-
+		console.log(packages)
 		return {
 			packages: packages
 		};

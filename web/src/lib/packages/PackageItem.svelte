@@ -11,7 +11,7 @@
 	 */
 	export let actions;
 
-	let expand = false
+	export let expand = false
 	
 </script>
 
