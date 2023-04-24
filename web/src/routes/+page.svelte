@@ -96,7 +96,7 @@
 	<Header />
 	<h1 class="text-3xl font-bold mt-16">Home page, list all packages w/actions</h1>
 	<main class="w-full flex grow">
-		<section class="border border-gray-200 rounded-xl p-4 my-4 min-w-[240px]">
+		<section class="border border-gray-200 rounded-xl p-2 my-4 min-w-[240px]">
 			{#each [...$store] as [pkg, actions]}
 				<PackageItem
 					packageName={pkg}

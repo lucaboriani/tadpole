@@ -19,7 +19,7 @@
 <div>
    
     <button 
-        class="flex flex-col" 
+        class="flex flex-col w-full hover:bg-gray-100 py-2" 
         on:click={() => actionSelected(action)}
     >
         <span class="text-xl pl-4">{action.name}</span>
