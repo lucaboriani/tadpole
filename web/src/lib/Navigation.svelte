@@ -11,10 +11,5 @@
 				>actions (clientside)</a
 			>
 		</li>
-		<li class="mx-2 my-1 p-2 bg-gray-100 grow">
-			<a class="w-full h-full flex items-center justify-center" href="/serveractions"
-				>actions (serverside)</a
-			>
-		</li>
 	</ul>
 </aside>
