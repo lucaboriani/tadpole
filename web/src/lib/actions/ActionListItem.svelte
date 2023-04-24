@@ -2,7 +2,11 @@
     import { createEventDispatcher } from 'svelte';
     const dispatch = createEventDispatcher();
     /**
-	 * @type {{name: string; namespace: string; annotations: Array<{key:string, value:any}>}}
+	 * @type {{
+     *  name: string; 
+     *  namespace: string; 
+     *  annotations: Array<{key:string, value:any}>
+     * }}
 	 */
 	export let action;
 

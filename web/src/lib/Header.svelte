@@ -1,1 +1,1 @@
-<header class="sticky top-0">this is a header</header>
+<header class="sticky top-0 bg-white border-b-2 border-b-gray-100 h-8"></header>

@@ -16,17 +16,16 @@
 </script>
 
 <div>
-	<div class="flex items-center justify-between">
+	<button class="flex items-center justify-between w-full" on:click={()=>expand = !expand} >
 		<h3 class="text-xl font-bold">
 			{packageName === 'nuvolaris' ? 'default' : packageName.replace('nuvolaris', '') }
 		</h3>
-		<button
-			on:click={()=>expand = !expand} 
+		<div
 			class={`text-gray-300 font-bold ${expand ? '-rotate-90' : 'rotate-90'}`}
 		> 
 			> 
-		</button>
-	</div>
+		</div>
+	</button>
 	{#if expand}
 		{#each actions as action}
 			<ActionListItem action={action} on:action-selected/>
