@@ -9,8 +9,7 @@ export async function getActionCode({ name, namespace }) {
      */
      const {auth} = variables   
      if (auth) {
-        let path = getActionPath(name, namespace);
-        path += '?code=true';
+        let path = getActionPath(name, namespace) + '?code=true'
         try {
             const response = await fetch(path, {
                 method:'GET',
@@ -19,11 +18,10 @@ export async function getActionCode({ name, namespace }) {
                 }
             });
             if (response.ok) {
-                const action = await response.json();
+                const action = await response.json()
                 return action;
             }
         } catch (error) {
-            console.log('azz');
             // @ts-ignore
             throw new Error(error.message);
         }
