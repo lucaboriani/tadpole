@@ -1,11 +1,11 @@
 <script>
 	import { onMount } from 'svelte';
 	import Header from '$lib/Header.svelte';
-	import { code } from '$lib/packages/actions/editorStore';
+	import { code } from '$lib/actions/editorStore';
 	import { packages as store } from '$lib/packages/store';
 	import { authToken } from '$lib/auth/authStore';
 	import PackageItem from '$lib/packages/PackageItem.svelte';
-	import ActionEditor from '$lib/packages/actions/ActionEditor.svelte';
+	import ActionEditor from '$lib/actions/ActionEditor.svelte';
 	import { variables } from '$lib/envVariables';
 	/** @type {import('./$types').PageData} */
 	export let data;
