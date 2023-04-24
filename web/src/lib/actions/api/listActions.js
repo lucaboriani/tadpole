@@ -1,14 +1,12 @@
 import { variables } from '$lib/envVariables';
-import { Buffer } from 'buffer';
 
 
 export async function listActions() {
     /**
-     * @type {string}
+     * @type {{auth:string}}
      */
-    const auth = `Basic ${Buffer.alloc(101,variables.apiKey).toString('base64')}`
-    
-     if (auth) {
+    const { auth } = variables   
+    if (auth) {
         let path = variables.apiHost + '/api/v1/namespaces/_/actions';
         try {
             const response = await fetch(path, {

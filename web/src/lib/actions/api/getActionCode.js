@@ -1,15 +1,13 @@
 import { variables } from '$lib/envVariables';
-import { Buffer } from 'buffer';
 import {getActionPath } from './getActionPath'
 /**
  * @param {{ name: string; namespace: string; }} detail
  */
 export async function getActionCode({ name, namespace }) {
     /**
-     * @type {string}
+     * @type {{auth:string}}
      */
-    const auth = `Basic ${Buffer.alloc(101,variables.apiKey).toString('base64')}`
-    
+     const {auth} = variables   
      if (auth) {
         let path = getActionPath(name, namespace);
         path += '?code=true';
