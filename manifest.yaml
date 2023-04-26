@@ -61,7 +61,10 @@ packages:
     actions:
       hello_go:
         function: packages/hello_lang/hello-go.go
+        web: true
       hello_php:
         function: packages/hello_lang/hello-php.php
+        web: true
       hello_python:
         function: packages/hello_lang/hello-python.py
+        web: true
