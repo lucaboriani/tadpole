@@ -3,9 +3,10 @@
 	import CodeMirror from 'svelte-codemirror-editor';
 	import { javascript } from '@codemirror/lang-javascript';
 	import { python } from "@codemirror/lang-python";
-	import { code, lang } from './editorStore';
+	import { php } from "@codemirror/lang-php";
+	import { code } from './editorStore';
 	/**
-	 * @type {{name:string,namespace:string, exec: { code: string; kind:string }; }}
+	 * @type {{name:string,namespace:string,annotations:Array<{key:string, value:string}>, exec: { code: string; }; }}
 	 */
 	export let action;
 
@@ -13,10 +14,40 @@
 
 	$: actionName = action.name;
 	$: namespace = action.namespace;
-	$: actionLanguage = action.exec.kind.startsWith('nodejs') ? javascript : python
+
+	$: exec = action.annotations.find(( ann) => ann.key === 'exec')?.value || 'unknown'
+	/**
+	 * @type {((config?: { jsx?: boolean | undefined; typescript?: boolean | undefined; } | undefined) => import("@codemirror/language").LanguageSupport) | ((config?: { baseLanguage?: import("@codemirror/language").Language | null | undefined; plain?: boolean | undefined; } | undefined) => import("@codemirror/language").LanguageSupport) | (() => any)}
+	 */
+	let actionLanguage
+	$:  {
+		actionLanguage = getLang(exec)
+	}
+	
+	/**
+	 * @param {string} exec
+	 */
+	function getLang(exec){
+		const runtime = exec.split(':')[0]
+		switch(runtime){
+			case 'nodejs':
+				return javascript
+			case 'python':
+				return python
+			case 'php':
+				return php
+			case 'go':
+				// fake....
+				return javascript
+			default:
+				// fake....
+				return javascript
+				
+		}
+	}
+	
 	onMount(() => {
 		code.set(action.exec.code)
-		lang.set(action.exec.kind)
 	});
 	/**
 	 * @param {any} event
@@ -39,7 +70,7 @@
 		<div>
 			<b class="block text-sm">{namespace}</b>
 			<h1 class="text-2xl font-bold">{actionName}</h1>
-			<span class="block mb-2 text-sm">{$lang}</span>
+			<span class="block mb-2 text-sm">{exec}</span>
 		</div>
 		{#if $code !== action.exec.code}
 			<div class="flex">

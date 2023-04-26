@@ -12,7 +12,7 @@
 	const { packages } = data;
 
 	/**
-	 * @type {{name: string; namespace: string; exec: { code: string; kind:string }; }}
+	 * @type {{name: string; namespace: string; exec: { code: string; kind:string }; annotations:Array<{key:string, value:string}> }}
 	 */
 	let action;
 

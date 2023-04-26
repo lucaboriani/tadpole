@@ -16,12 +16,12 @@
 </script>
 
 <div>
-	<button class="flex items-center justify-between w-full" on:click={()=>expand = !expand} >
+	<button class="p-2 flex items-center justify-between w-full group hover:bg-gray-200" on:click={()=>expand = !expand} >
 		<h3 class="text-xl font-bold">
 			{packageName === 'nuvolaris' ? 'default' : packageName.replace('nuvolaris', '') }
 		</h3>
 		<div
-			class={`text-gray-300 font-bold ${expand ? '-rotate-90' : 'rotate-90'}`}
+			class={`text-gray-300 font-bold ${expand ? '-rotate-90' : 'rotate-90'} group-hover:text-black`}
 		> 
 			> 
 		</div>

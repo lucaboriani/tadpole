@@ -57,3 +57,11 @@ packages:
         web: true
         inputs:
           redis: "redis://redis"
+  hello_lang:
+    actions:
+      hello_go:
+        function: packages/hello_lang/hello-go.go
+      hello_php:
+        function: packages/hello_lang/hello-php.php
+      hello_python:
+        function: packages/hello_lang/hello-python.py
