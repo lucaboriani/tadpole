@@ -15,8 +15,6 @@ export async function load() {
 				packages.get(action.namespace).push(action);
 			}
 		});
-
-		console.log(packages)
 		return {
 			packages: packages
 		};
