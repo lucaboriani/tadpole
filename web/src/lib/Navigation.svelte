@@ -3,11 +3,5 @@
 		<li class="mx-2 my-1 p-2 bg-gray-100 grow">
 			<a class="w-full h-full flex items-center justify-center" href="/">home</a>
 		</li>
-		<li class="mx-2 my-1 p-2 bg-gray-100 grow">
-			<a class="w-full h-full flex items-center justify-center" href="/tasks">tasks</a>
-		</li>
-		<li class="mx-2 my-1 p-2 bg-gray-100 grow">
-			<a class="w-full h-full flex items-center justify-center" href="/address">address</a>
-		</li>
 	</ul>
 </aside>
