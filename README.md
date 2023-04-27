@@ -1,50 +1,42 @@
 # Tadpole
 
-Preparatory sketch app for [nuvolaris](https://www.nuvolaris.io/) admin panel. Testing/exploring base functionalities of the combination of sveltekit and nuvolaris. Many hints and classes found in [microbots](https://github.com/nuvolaris/microbots)
+Preparatory sketch app for [nuvolaris](https://www.nuvolaris.io/) admin panel. Testing/exploring base functionalities of the combination of sveltekit and nuvolaris. 
 
-The project has been scaffolded with [`create-svelte`](https://github.com/sveltejs/kit/tree/master/packages/create-svelte).
+The project has been scaffolded with [`create-svelte`](https://github.com/sveltejs/kit/tree/master/packages/create-svelte) and generates a static site using [`@sveltejs/adapter-static`](https://www.npmjs.com/package/@sveltejs/adapter-static)
 
 ## Overview
 
 This scratch app, found in `/web` is configured to be styled with tailwind. 
+It lists all the actions available grouped by package.
 
-Demo actions/packages are found in `/packages`
+Each package is dispayed as an expandable element listing all its actions.
+Clicking on each function loads and displays its code. 
+Modifying the code makes two button appear: clicking on reset the code is restored to the original state, while clicking on update currently logs to the console the value of the modified code.
 
 project requires node 16 + 
 
+Demo package with actions is found in `/packages/hello_lang` (see `manifest.yaml`). The creation of the demo package is optional. 
 
-### auth bypass
 
-Please note that authentication flow hasn't been implemented
 
-Setup .env  files
+## to run demo
+
+`cd web && npm install`
+
+Once you've checked out the project and installed dependencies, setup the .env  file:
 
 copy and rename `web/env.example`into 
-.env , edit it accordingly. Default OW_API_HOST is http://localhost:3233 , OW_API_KEY is found in ./nuvolaris/config.yaml -namespaces -> nuvolaris.
+`web/.env` , edit it accordingly, i.e. 
 
+```
+# Public
+VITE_PUBILC_OW_API_HOST='your private api host'
+VITE_PUBILC_OW_API_KEY='your private key'
+```
 
-### Views
+if you're unsure, grab your credentials with `nuv wsk property get` (whisk API host -> VITE_PUBILC_OW_API_HOST	and whisk auth -> VITE_PUBILC_OW_API_KEY)
 
-the app has 5 different views: 
-
-- *index*, nothing special
-- */tasks* (yet another todolist, using redis )
-- */address* (a remake of [this tutorial](https://www.youtube.com/watch?v=pOdhx_vxxPI&t=43s&ab_channel=Nuvolaris)). 
-- */actions* (displays a list of all registered actions, grouped by package.
-    Clicking on an action's name loads the source code. 
-    If the code is modified the interface displays an "update" and a "reset" button. (clicking on reset works, while clicking on update currently console logs the changed value of the code )  
-
-- */serveractions*
-    EXPERIMENTAL - proof of concept.
-    Lists all registered actions, grouped by package, like in /actions but with a server side client. Since the official [ow client](https://github.com/apache/openwhisk-client-js/tree/master/lib) didn't seem to be compatible with svelte-kit/vite environment (babel transpile seemed to work in dev mode but not with build/preview or playwright's builtin server)  I've made a quick and dirty es6+ compatible patch (totally) of the client (with its few dependencies ), see `src/lib/ow-client`. 
-    
-
-to support serverside functionalities it uses [@sveltejs/adapter-node](https://www.npmjs.com/package/@sveltejs/adapter-node), waiting for nuvolaris/sveltekit adapter :)
-
-
-## Developing
-
-Once you've checked out the project and installed dependencies with `npm install` (or `pnpm install`), start a development server:
+start a development server:
 
 ```bash
 npm run dev
@@ -53,30 +45,19 @@ npm run dev
 npm run dev -- --open
 ```
 
-## Installed dependencies
-
-The following dep have been installed: 
-
-[buffer](https://www.npmjs.com/package/buffer)
-
-[@codemirror/lang-javascript](https://github.com/codemirror/lang-javascript)
-
-[@codemirror/lang-python](https://github.com/codemirror/lang-python)
-
-[svelte-codemirror-editor](https://github.com/touchifyapp/svelte-codemirror-editor)
-
-
-
-
 ## Testing
 
-This project uses vitest for unit testing (no tests written yet) and playwright for e2e testing
+This project uses vitest for unit testing and playwright for e2e testing.
+
 
 to run unit test : `npm run test:unit`
 
+see `web/src/lib/actions/ActionListItem.spec.js` and `web/src/lib/packages/PackageItem.spec.js` for sample implementations.
+
+
 to run e2e test : `npm run test` 
 
-playwright tests are found in `/tests`, see `/tests/address.spec.js` for a sample implementation
+playwright tests are found in `/tests`, see `web/tests/home.spec.js` for a sample implementation. Please note that to pass `/tests/home.spec.js` the default "hello" action should not have been deleted.
 
 
 ## Building
@@ -88,6 +69,24 @@ npm run build
 ```
 
 You can preview the production build with `npm run preview`.
+
+
+
+
+## Installed dependencies
+
+The following dep have been installed: 
+
+[buffer](https://www.npmjs.com/package/buffer)
+
+[svelte-codemirror-editor](https://github.com/touchifyapp/svelte-codemirror-editor)
+
+[@codemirror/lang-javascript](https://github.com/codemirror/lang-javascript)
+
+[@codemirror/lang-python](https://github.com/codemirror/lang-python)
+
+[@codemirror/lang-php](https://github.com/codemirror/lang-php)
+
 
 
 
