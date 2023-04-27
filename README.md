@@ -13,20 +13,22 @@ Each package is dispayed as an expandable element listing all its actions.
 Clicking on each function loads and displays its code. 
 Modifying the code makes two button appear: clicking on reset the code is restored to the original state, while clicking on update currently logs to the console the value of the modified code.
 
-project requires node 16 + 
+project requires node 16 +  and was developed using `whisk CLI version	v0.2.2-trinity.22072521`
 
 A demo package with actions is found in `/packages/hello_lang` (see `manifest.yaml`). The creation of the demo package is optional, while the default "hello" action should exist for testing purposes (see "Testing" below) 
 
 
 
-## to run demo
+## To run demo
+
+Once you've checked out the project,
 
 `cd web && npm install`
 
-Once you've checked out the project and installed dependencies, setup the .env  file:
+setup the .env  file:
 
-copy and rename `web/env.example`into 
-`web/.env` , edit it accordingly, i.e. 
+copy and rename `env.example`into 
+`.env` , edit it accordingly, i.e. 
 
 ```
 # Public

@@ -28,7 +28,7 @@
     >
         <span class="text-xl pl-4">{action.name}</span>
         <div class="flex pl-4 text-sm">
-            <span>{exec ? exec?.value : 'unknown'}</span>
+            <span>{exec?.value ? exec.value : 'unknown'}</span>
             <span class="flex ml-2">
                 web: 
                 <input class="ml-2" type="checkbox" checked={webEnabled ? webEnabled.value : false} disabled />

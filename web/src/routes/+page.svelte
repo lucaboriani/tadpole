@@ -27,7 +27,6 @@
 	async function handleActionSelected(event) {
 		try {
 			const { detail } = event;
-			console.log('detail:',detail)
 			action = await getActionCode(detail);
 			code.set(action.exec.code);
 		} catch (error) {
