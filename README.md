@@ -15,7 +15,7 @@ Modifying the code makes two button appear: clicking on reset the code is restor
 
 project requires node 16 + 
 
-Demo package with actions is found in `/packages/hello_lang` (see `manifest.yaml`). The creation of the demo package is optional. 
+A demo package with actions is found in `/packages/hello_lang` (see `manifest.yaml`). The creation of the demo package is optional. 
 
 
 
