@@ -37,8 +37,8 @@ VITE_PUBILC_OW_API_KEY='your private key'
 if you're unsure, grab your credentials with `nuv wsk property get` 
 
 ```bash
-whisk API host		your-api-host
-whisk auth		    your-auth-key
+whisk API host      your-api-host
+whisk auth          your-auth-key
 
 ...
 
