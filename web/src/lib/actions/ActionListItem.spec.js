@@ -6,8 +6,8 @@ import userEvent from "@testing-library/user-event";
 import ActionListItem from './ActionListItem.svelte'
 
 // mocks
-import { helloAction } from '../mocks/helloAction';
-import { webEnabledAction } from '../mocks/webEnabledAction'
+import { helloAction } from '../../../mocks/helloAction';
+import { webEnabledAction } from '../../../mocks/webEnabledAction'
 
 
 

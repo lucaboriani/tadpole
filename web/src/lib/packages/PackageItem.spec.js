@@ -6,7 +6,7 @@ import userEvent from "@testing-library/user-event";
 import PackageItem from './PackageItem.svelte'
 
 // mocks
-import { helloAction } from '../mocks/helloAction';
+import { helloAction } from '../../../mocks/helloAction';
 
 
 
