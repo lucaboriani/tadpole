@@ -15,7 +15,7 @@ Modifying the code makes two button appear: clicking on reset the code is restor
 
 project requires node 16 + 
 
-A demo package with actions is found in `/packages/hello_lang` (see `manifest.yaml`). The creation of the demo package is optional. 
+A demo package with actions is found in `/packages/hello_lang` (see `manifest.yaml`). The creation of the demo package is optional, while the default "hello" action should exist for testing purposes (see "Testing" below) 
 
 
 
@@ -34,7 +34,15 @@ VITE_PUBILC_OW_API_HOST='your private api host'
 VITE_PUBILC_OW_API_KEY='your private key'
 ```
 
-if you're unsure, grab your credentials with `nuv wsk property get` (whisk API host -> VITE_PUBILC_OW_API_HOST	and whisk auth -> VITE_PUBILC_OW_API_KEY)
+if you're unsure, grab your credentials with `nuv wsk property get` 
+
+```bash
+whisk API host		your-api-host
+whisk auth		    your-auth-key
+
+...
+
+```
 
 start a development server:
 
@@ -47,7 +55,7 @@ npm run dev -- --open
 
 ## Testing
 
-This project uses vitest for unit testing and playwright for e2e testing.
+This project uses vitest and [svelte-testing-library](https://github.com/testing-library/svelte-testing-library) for unit testing and playwright for e2e testing.
 
 
 to run unit test : `npm run test:unit`
@@ -57,7 +65,7 @@ see `web/src/lib/actions/ActionListItem.spec.js` and `web/src/lib/packages/Packa
 
 to run e2e test : `npm run test` 
 
-playwright tests are found in `/tests`, see `web/tests/home.spec.js` for a sample implementation. Please note that to pass `/tests/home.spec.js` the default "hello" action should not have been deleted.
+playwright tests are found in `/tests`, see `web/tests/home.spec.js` for a sample implementation. **Please note that to pass `/tests/home.spec.js` the default "hello" action should not have been deleted**.
 
 
 ## Building
